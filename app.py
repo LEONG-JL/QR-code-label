@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, redirect
 from pathlib import Path
 import qrcode
 from utils.iniparser import IniParser
@@ -75,20 +75,49 @@ def lmt():
             return render_template('lmterror.html', error_message=ex)
     return render_template('lmtform.html')
 
+@app.route('/lmtpreview/', methods = ['POST'])
+def lmtpreview():
+    if request.method == 'POST':
+        try:
+            fp = pathlib.Path(__file__).parent.resolve()
+            barcode = request.form['barcode']
+            sku = process_bar_code_sku(barcode)
+
+            mapper = IniParser()
+            mapper.read('./lmt.ini')
+            mapper_obj = mapper.as_dict()
+            product_type = mapper_obj['LMTType'][sku]
+            product_sku = mapper_obj['LMTSKU'][sku]
+            product_name = mapper_obj['LMTProductName'][sku]
+
+            serialno = process_bar_code_serialno(barcode, product_type)
+
+            generate_qr_code(product_sku, f'./static/sku/{product_sku}.png')
+            generate_qr_code(serialno, f'./static/serialno/{serialno}.png')
+            sku_url = url_for('static', filename=f'sku/{product_sku}.png')
+            # sku_url = f'{fp}/static/sku/{product_sku}.png'
+            serialno_url = url_for('static', filename=f'serialno/{serialno}.png')
+            # serialno_url = f'{fp}/static/serialno/{serialno}.png'
+            return render_template('lmtresults.html', product_name=product_name, product_sku=product_sku, serialno=serialno, sku_url=sku_url, serialno_url=serialno_url)
+        except Exception:
+            ex = traceback.format_exc()
+            return render_template('lmterror.html', error_message=ex)
+    return render_template('lmtform.html')
+
 @app.route('/lmtclear/', methods = ['POST'])
 def lmtclear():
     if request.method == 'POST':
         sku_folder = Path('./static/sku/')
         for file in sku_folder.glob('*'):
-            if file.is_file():
+            if file.is_file() and file.name != '.gitkeep':
                 file.unlink()
 
         serialno_folder = Path('./static/serialno/')
         for file in serialno_folder.glob('*'):
-            if file.is_file():
+            if file.is_file() and file.name != '.gitkeep':
                 file.unlink()
 
-    return render_template('lmtform.html')
+    return redirect('/lmt')
 
 
 def process_bar_code_serialno(data, product_type):

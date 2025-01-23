@@ -4,16 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Easmed Custom QR Code Creator</title>
+    <script>
+        window.onload = () => {
+            document.getElementById('barcode').focus();
+        }
+    </script>
 </head>
 
 <body>
     <h1>Process Barcode</h1>
     <form action="/lmt/" method="post">
         <div>
-            <input type="text" name="barcode" id="barcode" />
+            <input type="text" name="barcode" id="barcode" autofocus />
         </div>
         <div>
-            <button type="submit">Submit</button>
+            <button type="submit">Generate Label</button>
+            <span style="width:20px;display:inline-block;"></span>
+            <button type="submit" formaction="/lmtpreview/">Preview</button>
         </div>
     </form>
     <div style="height:100px;"></div>
