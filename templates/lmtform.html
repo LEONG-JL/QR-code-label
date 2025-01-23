@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Easmed Custom QR Code Creator</title>
+</head>
+
+<body>
+    <h1>Process Barcode</h1>
+    <form action="/lmt/" method="post">
+        <div>
+            <input type="text" name="barcode" id="barcode" />
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <div style="height:100px;"></div>
+    <h1>Clear image files</h1>
+    <form action="/lmtclear/" method="post">
+        <div>
+            <button type="submit">Delete all QR Code images</button>
+        </div>
+    </form>
+</body>
