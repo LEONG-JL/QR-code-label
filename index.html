@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standardized Label Creation</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Standardized Label Creation</h1>
+
+        <form action="https://your-backend.onrender.com/lmt/" method="POST">
+            <label for="manufacturer">Select Manufacturer:</label>
+            <select id="manufacturer" name="manufacturer" required>
+                <option value="">Select...</option>
+                <option value="Brand 1">Brand 1</option>
+                <option value="Brand 2">Brand 2</option>
+                <option value="Brand 3">Brand 3</option>
+            </select>
+
+            <label for="brand">Brand:</label>
+            <input type="text" id="brand" name="brand" placeholder="Brand name" required>
+
+            <label for="sku">SKU:</label>
+            <input type="text" id="sku" name="sku" placeholder="6-78924-0" required>
+
+            <label for="vdi">VDI:</label>
+            <input type="text" id="vdi" name="vdi" placeholder="(10)12345 (1) 6-78924-0" required>
+
+            <label for="item-no">Item No:</label>
+            <input type="text" id="item-no" name="item-no" placeholder="78924" required>
+
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" placeholder="Product description" required>
+
+            <label for="serial">SN/LOT:</label>
+            <input type="text" id="serial" name="serial" placeholder="12345" required>
+
+            <label for="quantity">Qty:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+
+            <div class="button-group">
+                <button type="submit">Print</button>
+                <button type="reset">Clear</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

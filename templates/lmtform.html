@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Easmed Custom QR Code Creator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Label Generator</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Label Generator</h1>
+        <form action="/lmt/" method="POST">
+            <label for="barcode">Barcode / UDI:</label>
+            <input type="text" id="barcode" name="barcode" placeholder="Enter barcode or UDI" required>
+            <button type="submit">Generate Label</button>
+        </form>
+        <button class="clear-btn" onclick="clearLabels()">Clear All Labels</button>
+    </div>
+
     <script>
-        window.onload = () => {
-            document.getElementById('barcode').focus();
+        function clearLabels() {
+            fetch('/lmtclear/', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => alert("Failed to clear labels. Please try again."));
         }
     </script>
-</head>
-
-<body>
-    <h1>Process Barcode</h1>
-    <form action="/lmt/" method="post">
-        <div>
-            <input type="text" name="barcode" id="barcode" autofocus />
-        </div>
-        <div>
-            <button type="submit">Generate Label</button>
-            <span style="width:20px;display:inline-block;"></span>
-            <button type="submit" formaction="/lmtpreview/">Preview</button>
-        </div>
-    </form>
-    <div style="height:100px;"></div>
-    <h1>Clear image files</h1>
-    <form action="/lmtclear/" method="post">
-        <div>
-            <button type="submit">Delete all QR Code images</button>
-        </div>
-    </form>
 </body>
+</html>
