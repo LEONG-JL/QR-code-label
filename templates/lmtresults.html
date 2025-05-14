@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Label Results</title>
     <style>
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-            width: 271px;
-            height: 696px;
+            font-family: Arial, sans-serif;
+            font-size: 21px;
         }
-        img {
-            width:200px
+      
+        .section {
+            margin-bottom: 1px;
+            border-bottom: 1px solid black;
+            padding-bottom: 1px;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .qr-code {
+            width: 190px;
+            height: 190px;
+            margin: 1px 0;
         }
     </style>
 </head>
-
 <body>
-    <div>
-        SKU
+
+    <div class="label-container">
+        <div class="section">
+            <p class="section-title">SKU</p>
+            <img class="qr-code" src="{{ sku_url }}" alt="SKU QR Code">
+            <p>{{ product_sku }}</p>
+            <p>{{ product_name }}</p>
+        </div>
+
+        <div class="section">
+            <p class="section-title">LOT/SN</p>
+            <img class="qr-code" src="{{ serialno_url }}" alt="Serial Number QR Code">
+            <p>{{ serialno }}</p>
+        </div>
     </div>
-    <div>
-        <img src="{{sku_url}}" />
-    </div>
-    <div>
-        {{product_sku}}
-    </div>
-    <div style="border-top:solid 1px black;width:100%;">
-    </div>
-    <div>
-        {{product_name}}
-    </div>
-    <div style="height:120px;width:100%;">
-    </div>
-    <div>
-        LOT/SN
-    </div>
-    <div>
-        <img src="{{serialno_url}}" />
-    </div>
-    <div>
-        {{serialno}}
-    </div>
+
 </body>
+</html>
