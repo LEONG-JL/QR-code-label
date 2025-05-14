@@ -3,48 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Label Results</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 21px;
-        }
-      
-        .section {
-            margin-bottom: 1px;
-            border-bottom: 1px solid black;
-            padding-bottom: 1px;
-        }
-        .section:last-child {
-            border-bottom: none;
-        }
-        .section-title {
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .qr-code {
-            width: 190px;
-            height: 190px;
-            margin: 1px 0;
-        }
-    </style>
+    <title>Label Result</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-
-    <div class="label-container">
-        <div class="section">
-            <p class="section-title">SKU</p>
-            <img class="qr-code" src="{{ sku_url }}" alt="SKU QR Code">
-            <p>{{ product_sku }}</p>
-            <p>{{ product_name }}</p>
+    <div class="container">
+        <h1>Label Generated</h1>
+        <p><strong>Product Name:</strong> {{ product_name }}</p>
+        <p><strong>SKU:</strong> {{ product_sku }}</p>
+        <p><strong>Serial No:</strong> {{ serialno }}</p>
+        <div class="qr-codes">
+            <img src="{{ sku_url }}" alt="SKU QR Code">
+            <img src="{{ serialno_url }}" alt="Serial No QR Code">
         </div>
-
-        <div class="section">
-            <p class="section-title">LOT/SN</p>
-            <img class="qr-code" src="{{ serialno_url }}" alt="Serial Number QR Code">
-            <p>{{ serialno }}</p>
-        </div>
+        <a href="/" class="btn">Generate Another Label</a>
     </div>
-
 </body>
 </html>
