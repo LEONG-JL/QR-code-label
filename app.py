@@ -27,7 +27,7 @@ os.makedirs(LABEL_DIR, exist_ok=True)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('lmtform.html')
 
 @app.route('/lmt/', methods=['POST'])
 def lmt():
@@ -42,10 +42,7 @@ def lmt():
 
         # Load Excel database
         df = pd.read_excel(EXCEL_DB_PATH)
-        df['RESMED GTIN'] = pd.to_numeric(df['RESMED GTIN'], errors='coerce')
-        df.dropna(subset=['RESMED GTIN'], inplace=True)
         df['RESMED GTIN'] = df['RESMED GTIN'].astype(int)
-
         row = df[df['RESMED GTIN'] == gtin_from_udi]
 
         if row.empty:
@@ -125,8 +122,6 @@ def lmtpreview():
         gtin_from_udi = int(UDI_trimmed[:12])
 
         df = pd.read_excel(EXCEL_DB_PATH)
-        df['RESMED GTIN'] = pd.to_numeric(df['RESMED GTIN'], errors='coerce')
-        df.dropna(subset=['RESMED GTIN'], inplace=True)
         df['RESMED GTIN'] = df['RESMED GTIN'].astype(int)
         row = df[df['RESMED GTIN'] == gtin_from_udi]
 
