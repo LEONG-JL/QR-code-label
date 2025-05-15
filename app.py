@@ -27,7 +27,7 @@ os.makedirs(LABEL_DIR, exist_ok=True)
 
 @app.route('/')
 def index():
-    return render_template('lmtform.html')
+    return render_template('index.html')
 
 @app.route('/lmt/', methods=['POST'])
 def lmt():
