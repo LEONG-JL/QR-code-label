@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Bind the brand input to search manufacturers
     brandInput.addEventListener('input', (e) => {
         searchManufacturers(e.target.value);
     });
