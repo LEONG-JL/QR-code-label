@@ -42,9 +42,13 @@ def lmt():
 
         # Load Excel database
         df = pd.read_excel(EXCEL_DB_PATH)
+        df = pd.read_excel(EXCEL_DB_PATH)
+        df['RESMED GTIN'] = pd.to_numeric(df['RESMED GTIN'], errors='coerce')
+        df.dropna(subset=['RESMED GTIN'], inplace=True)
         df['RESMED GTIN'] = df['RESMED GTIN'].astype(int)
-        row = df[df['RESMED GTIN'] == gtin_from_udi]
 
+        row = df[df['RESMED GTIN'] == gtin_from_udi]
+        
         if row.empty:
             raise ValueError(f"GTIN {gtin_from_udi} not found in the database.")
 
