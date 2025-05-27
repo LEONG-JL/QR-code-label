@@ -1,22 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Label Result</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Label Result</title>
+<style>
+  /* Fixed size container */
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 696px;
+    height: 271px;
+  }
+  .container {
+    width: 696px;
+    height: 271px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 8px;
+  }
+  p.label-text {
+    margin: 0;
+    font-weight: bold;
+  }
+  img.qr {
+    width: 150px;
+    height: 80px;
+    object-fit: contain;
+  }
+  hr {
+    width: 100%;
+    border: 1px solid black;
+    margin: 4px 0;
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Label Generated</h1>
-        <p><strong>Product Name:</strong> {{ product_name }}</p>
-        <p><strong>SKU:</strong> {{ product_sku }}</p>
-        <p><strong>Serial No:</strong> {{ serialno }}</p>
-        <div class="qr-codes">
-            <img src="{{ sku_url }}" alt="SKU QR Code">
-            <img src="{{ serialno_url }}" alt="Serial No QR Code">
-        </div>
-        <a href="/" class="btn">Generate Another Label</a>
-    </div>
+  <div class="container">
+    <p class="label-text">SKU</p>
+    <img class="qr" src="{{ sku_url }}" alt="SKU QR Code" />
+    <p>{{ product_sku }}</p>
+    <hr />
+    <p>{{ product_name }}</p>
+    <hr />
+    <p class="label-text">LOT/SN</p>
+    <img class="qr" src="{{ serialno_url }}" alt="Serial No QR Code" />
+    <p>{{ serialno }}</p>
+  </div>
 </body>
 </html>
