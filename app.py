@@ -20,7 +20,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
-        return render_template('lmtform.html')
+        return render_template('index.html')
 
 @app.route('/lmt/', methods=['GET', 'POST'])
 def lmt():
