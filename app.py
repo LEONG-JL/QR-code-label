@@ -64,7 +64,7 @@ def lmt():
                 imgkit.from_string(template_string, label_path, options={
                     "enable-local-file-access": "",
                     "width": "696",
-                    "height": "271"
+                    "height": "271",
                     "disable-smart-width": "",
                     "quiet": ""
                 })
