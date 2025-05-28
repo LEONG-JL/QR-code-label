@@ -15,7 +15,7 @@ EXCEL_DB_PATH = r"C:\Users\TAS Xavier\Downloads\RESMED_DATABASE_060525.xlsx"
 
 @app.route('/')
 def index():
-    return render_template('lmtform.html')
+    return render_template('index.html')
 
 @app.route('/lmt/', methods=['GET', 'POST'])
 def lmt():
@@ -94,7 +94,7 @@ def lmt():
             )
 
             send(instructions=instructions, printer_identifier=printer, backend_identifier=backend, blocking=True)
-            return render_template('lmtform.html')
+            return render_template('index.html')
 
         except Exception:
             error_message = traceback.format_exc()
@@ -147,7 +147,7 @@ def lmtpreview():
             ex = traceback.format_exc()
             return render_template('lmterror.html', error_message=ex)
 
-    return render_template('lmtform.html')
+    return render_template('index.html')
 
 @app.route('/lmtclear/', methods=['POST'])
 def lmtclear():
