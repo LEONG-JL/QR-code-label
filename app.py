@@ -63,8 +63,10 @@ def lmt():
                 label_path = f'./static/label/{barcode}.png'
                 imgkit.from_string(template_string, label_path, options={
                     "enable-local-file-access": "",
-                    "crop-h": "696",
-                    "crop-w": "271"
+                    "width": "696",
+                    "height": "271"
+                    "disable-smart-width": "",
+                    "quiet": ""
                 })
 
                 instructions = convert(
