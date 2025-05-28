@@ -87,13 +87,13 @@ def lmt():
                     backend_identifier=backend,
                     blocking=True
                 )
-                return render_template('lmtform.html')
+                return render_template('index.html')
 
             except Exception:
                 ex = traceback.format_exc()
                 return render_template('lmterror.html', error_message=ex)
 
-        return render_template('lmtform.html')
+        return render_template('index.html')
 
 @app.route('/lmtpreview/', methods=['POST'])
 def lmtpreview():
@@ -129,7 +129,7 @@ def lmtpreview():
                 ex = traceback.format_exc()
                 return render_template('lmterror.html', error_message=ex)
 
-        return render_template('lmtform.html')
+        return render_template('index.html')
 
 @app.route('/lmtclear/', methods=['POST'])
 def lmtclear():
@@ -175,7 +175,7 @@ def upload_excel():
                 ex = traceback.format_exc()
                 return render_template('lmterror.html', error_message=ex)
 
-        return render_template('upload_form.html')
+        return render_template('index.html')
 
 def process_bar_code_serialno(data, product_type):
         if product_type == 'PRISMA':
