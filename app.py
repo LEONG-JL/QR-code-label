@@ -8,14 +8,30 @@ from brother_ql.conversion import convert
 import imgkit
 import pathlib
 import traceback
+from PIL import Image
+
 
 app = Flask(__name__)
+
+
 
 EXCEL_DB_PATH = r"C:\Users\TAS Xavier\Desktop\QR Custom\easmed_qr\DATABASE SAMPLE_270525.xlsx"
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+def prepare_for_brother_ql(qr_file, expected_dim=(696, 271)):
+    """Open QR code and center it on a 696x271 canvas."""
+    im = Image.open(qr_file).convert('1')  # Black-and-White
+    
+    canvas = Image.new('1', expected_dim, 1)  # White canvas
+    x = (expected_dim[0] - im.size[0]) // 2
+    y = (expected_dim[1] - im.size[1]) // 2
+    
+    canvas.paste(im, (x, y))
+    return canvas
+
 
 @app.route('/lmt/', methods=['GET', 'POST'])
 def lmt():
@@ -79,19 +95,21 @@ def lmt():
                 "crop-w": "271"
             })
 
+            prepared = prepare_for_brother_ql(label_path)
             instructions = convert(
-                qlr=qlr,
-                images=[label_path],
-                label='62x29',
-                rotate='90',
-                threshold=70.0,
-                dither=False,
-                compress=False,
-                red=False,
-                dpi_600=False,
-                hq=True,
-                cut=True
-            )
+            qlr=qlr,
+            images=[prepared],
+            label='62x29',
+            rotate='90',
+            threshold=70.0,
+            dither=False,
+            compress=False,
+            red=False,
+            dpi_600=False,
+            hq=True,
+           cut=True
+        )
+
 
             send(instructions=instructions, printer_identifier=printer, backend_identifier=backend, blocking=True)
             return render_template('index.html')
