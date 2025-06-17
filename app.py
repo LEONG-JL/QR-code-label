@@ -11,7 +11,7 @@ import traceback
 
 app = Flask(__name__)
 
-EXCEL_DB_PATH = r"C:\Users\TAS Xavier\Downloads\RESMED_DATABASE_060525.xlsx"
+EXCEL_DB_PATH = r"C:\Users\TAS Xavier\Desktop\QR Custom\easmed_qr\DATABASE SAMPLE_270525.xlsx"
 
 @app.route('/')
 def index():
@@ -37,9 +37,9 @@ def lmt():
             if row.empty:
                 raise ValueError(f"GTIN {gtin_from_udi} not found in database.")
 
-            product_type = row.iloc[0]['ITEM TRACKING CODE']
-            product_sku = str(row.iloc[0]['SKU'])  # Updated to RESMED SKU
-            product_name = row.iloc[0]['DESCRIPTION']  # Updated to RESMED DESCRIPTION
+            product_type = row.iloc[0]['Item Tracking Code']
+            product_sku = str(row.iloc[0]['No.'])  
+            product_name = row.iloc[0]['Description'] 
 
             # Serial or Lot logic
             if item_type_length == 33:
@@ -173,7 +173,7 @@ def generate_qr_code(data, output_path):
     )
     qr.add_data(data)
     qr.make(fit=True)
-    img = qr.make_image(fill='black', back_color='white')
+    img = qr.make_image(fill='wblack', back_color='white')
     img.save(output_path)
     return img
 
