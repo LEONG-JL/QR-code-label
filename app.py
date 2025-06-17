@@ -31,8 +31,8 @@ def lmt():
 
             # Load and filter Excel
             df = pd.read_excel(EXCEL_DB_PATH)
-            df['RESMED GTIN'] = df['RESMED GTIN'].astype(int)
-            row = df[df['RESMED GTIN'] == gtin_from_udi]
+            df['GTIN.GTIN'] = df['GTIN.GTIN'].astype(int)
+            row = df[df['GTIN.GTIN'] == gtin_from_udi]
 
             if row.empty:
                 raise ValueError(f"GTIN {gtin_from_udi} not found in database.")
