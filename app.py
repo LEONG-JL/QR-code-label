@@ -175,7 +175,12 @@ def lmtclear():
 
     return redirect('/lmt')
 
+import os
+
 def generate_qr_code(data, output_path):
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -184,9 +189,10 @@ def generate_qr_code(data, output_path):
     )
     qr.add_data(data)
     qr.make(fit=True)
-    img = qr.make_image(fill='black', back_color='white')
+    img = qr.make_image(fill_color='black', back_color='white')
     img.save(output_path)
     return img
+
 
 if __name__ == '__main__':
     app.run(debug=True)
