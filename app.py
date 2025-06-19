@@ -9,7 +9,7 @@ import imgkit
 import pathlib
 import traceback
 import os
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFront
 
 
 app = Flask(__name__)
@@ -108,7 +108,7 @@ def lmt():
        )
 
 
-            #send(instructions=instructions, printer_identifier=printer, backend_identifier=backend, blocking=True)
+            send(instructions=instructions, printer_identifier=printer, backend_identifier=backend, blocking=True)
             return render_template('index.html')
 
         except Exception:
@@ -201,6 +201,12 @@ def prepare_for_brother_ql(image_path):
     image = Image.open(image_path)
     return image.convert('RGB')
 
+def create_label(text,filename='label.png'):
+    img=Image.new('1',(696,200),color=255)
+    d=ImageDraw.Draw(img)
+    font=ImageFront.load_default()
+    d.text((10,10),text,font=font,fill=0)
+    img.save(filename)
 
 if __name__ == '__main__':
     app.run(debug=True)
