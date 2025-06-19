@@ -8,6 +8,7 @@ from brother_ql.conversion import convert
 import imgkit
 import pathlib
 import traceback
+import os
 from PIL import Image
 
 
@@ -183,7 +184,7 @@ def generate_qr_code(data, output_path):
     )
     qr.add_data(data)
     qr.make(fit=True)
-    img = qr.make_image(fill='wblack', back_color='white')
+    img = qr.make_image(fill='black', back_color='white')
     img.save(output_path)
     return img
 
