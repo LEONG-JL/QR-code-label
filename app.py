@@ -14,6 +14,12 @@ from PIL import Image
 
 app = Flask(__name__)
 
+import os
+
+# Create needed folders
+os.makedirs('./static/sku', exist_ok=True)
+os.makedirs('./static/serialno', exist_ok=True)
+os.makedirs('./static/label', exist_ok=True)
 
 
 EXCEL_DB_PATH = 'static/data/database.xlsx'
@@ -175,10 +181,8 @@ def lmtclear():
 
     return redirect('/lmt')
 
-import os
-
 def generate_qr_code(data, output_path):
-    # Ensure the directory exists
+    # Ensure the folder exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     qr = qrcode.QRCode(
@@ -192,6 +196,7 @@ def generate_qr_code(data, output_path):
     img = qr.make_image(fill_color='black', back_color='white')
     img.save(output_path)
     return img
+
 
 
 if __name__ == '__main__':
