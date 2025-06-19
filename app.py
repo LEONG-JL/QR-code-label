@@ -115,7 +115,7 @@ def lmt():
             error_message = traceback.format_exc()
             print(error_message)
             return f"<pre>{error_message}</pre>"
-        return render_template('index.html')
+    return render_template('index.html')
 
 
 @app.route('/lmtpreview/', methods=['POST'])
@@ -197,6 +197,9 @@ def generate_qr_code(data, output_path):
     img.save(output_path)
     return img
 
+def prepare_for_brother_ql(image_path):
+    image = Image.open(image_path)
+    return image.convert('RGB')
 
 
 if __name__ == '__main__':
