@@ -107,6 +107,8 @@ def lmt():
             error_message = traceback.format_exc()
             print(error_message)
             return f"<pre>{error_message}</pre>"
+        return render_template('index.html')
+
 
 @app.route('/lmtpreview/', methods=['POST'])
 def lmtpreview():
