@@ -61,11 +61,11 @@ def lmt():
             serialno_url = f'{fp}/static/serialno/{tracking_value}.png'
 
             # Printer setup
-            #backend = 'pyusb'
-            #model = 'QL-800'
-            #printer = 'usb://0x04f9:0x209b'
-            #qlr = BrotherQLRaster(model)
-            #qlr.exception_on_warning = True
+            backend = 'pyusb'
+            model = 'QL-800'
+            printer = 'usb://0x04f9:0x209b'
+            qlr = BrotherQLRaster(model)
+            qlr.exception_on_warning = True
 
             # Render label
             template_string = render_template(
@@ -85,19 +85,19 @@ def lmt():
             })
 
             prepared = prepare_for_brother_ql(label_path)
-            #instructions = convert(
-            #qlr=qlr,
-            #images=[prepared],
-            #label='62x29',
-            #rotate='90',
-            #threshold=70.0,
-            #dither=False,
-            #compress=False,
-            #red=False,
-            #dpi_600=False,
-            #hq=True,
-           #cut=True
-    #     )
+            instructions = convert(
+            qlr=qlr,
+            images=[prepared],
+            label='62x29',
+            rotate='90',
+            threshold=70.0,
+            dither=False,
+            compress=False,
+            red=False,
+            dpi_600=False,
+            hq=True,
+           cut=True
+       )
 
 
             #send(instructions=instructions, printer_identifier=printer, backend_identifier=backend, blocking=True)
