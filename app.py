@@ -15,7 +15,8 @@ app = Flask(__name__)
 
 
 
-EXCEL_DB_PATH = r"C:\Users\TAS Xavier\Desktop\QR Custom\easmed_qr\DATABASE SAMPLE_270525.xlsx"
+EXCEL_DB_PATH = 'static/data/database.xlsx'
+
 
 @app.route('/')
 def index():
