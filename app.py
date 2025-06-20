@@ -67,6 +67,7 @@ def lmt():
         # Generate QR codes
         sku_path = os.path.join(SKU_DIR, f"{product_sku}.png")
         serial_path = os.path.join(SERIAL_DIR, f"{tracking_value}.png")
+
         generate_qr_code(product_sku, sku_path)
         generate_qr_code(tracking_value, serial_path)
 
@@ -77,14 +78,21 @@ def lmt():
             raise ValueError(f"Serial QR code not found at {serial_path}")
 
         # Render the label image
+        sku_abs_path = os.path.abspath(sku_path).replace('\\', '/')
+        serial_abs_path = os.path.abspath(serial_path).replace('\\', '/')
+
+        sku_url = 'file:///' + sku_abs_path.replace(" ", "%20")
+        serialno_url = 'file:///' + serial_abs_path.replace(" ", "%20")
+
+       # Render the label HTML template to string
         template_string = render_template(
-            'lmtresults.html',
-            product_name=product_name,
-            product_sku=product_sku,
-            serialno=tracking_value,
-            sku_url = f'file:///{os.path.abspath(f"./static/sku/{product_sku}.png").replace(os.sep, "/")}',
-            serialno_url = f'file:///{os.path.abspath(f"./static/serialno/{tracking_value}.png").replace(os.sep, "/")}'
-        )
+        'lmtresults.html',
+         product_name=product_name,
+         product_sku=product_sku,
+         serialno=tracking_value,
+         sku_url=sku_url,
+         serialno_url=serialno_url
+         )
         print("Rendered template:\n", template_string)
 
         label_path = os.path.join(LABEL_DIR, f"{barcode}.png")
