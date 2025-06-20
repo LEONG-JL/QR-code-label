@@ -11,11 +11,11 @@ import traceback
 
 app = Flask(__name__)
 
-EXCEL_DB_PATH = r"C:\Users\TAS Xavier\Downloads\RESMED_DATABASE_060525.xlsx"
+EXCEL_DB_PATH = r"C:\Users\TAS Xavier\Desktop\QR Custom\easmed_qr\RESMED_DATABASE_060525.xlsx"
 
 @app.route('/')
 def index():
-    return render_template('lmtform.html')
+    return render_template('index.html')
 
 @app.route('/lmt/', methods=['GET', 'POST'])
 def lmt():
