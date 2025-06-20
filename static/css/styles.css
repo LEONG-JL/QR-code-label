@@ -20,13 +20,13 @@ body.label-body {
 }
 
 .label-container h1 {
-    font-size: 16px;
+    font-size: 100px;
     margin: 5px 0;
     color: #333;
 }
 
 .label-container p {
-    font-size: 12px;
+    font-size: 100px;
     margin: 3px 0;
 }
 
@@ -38,8 +38,8 @@ body.label-body {
 }
 
 .qr-codes img {
-    width: 80px;
-    height: 80px;
+    width: 500x;
+    height: 500px;
 }
 
 .generate-button {

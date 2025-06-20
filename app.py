@@ -82,8 +82,8 @@ def lmt():
             product_name=product_name,
             product_sku=product_sku,
             serialno=tracking_value,
-            sku_url=f'file://{sku_path}',
-            serialno_url=f'file://{serial_path}'
+            sku_url = f'file:///{os.path.abspath(f"./static/sku/{product_sku}.png").replace(os.sep, "/")}',
+            serialno_url = f'file:///{os.path.abspath(f"./static/serialno/{tracking_value}.png").replace(os.sep, "/")}'
         )
         print("Rendered template:\n", template_string)
 
