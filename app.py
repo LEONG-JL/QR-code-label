@@ -97,7 +97,7 @@ def lmt():
             "--quiet": ""
         })
 
-        # Printer code commented out (no printer connected)
+      
         backend = 'pyusb'
         model = 'QL-800'
         printer = 'usb://0x04f9:0x209b'
@@ -168,8 +168,8 @@ def generate_qr_code(data, output_path):
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4
+        box_size=15,
+        border=8
     )
     qr.add_data(data)
     qr.make(fit=True)
